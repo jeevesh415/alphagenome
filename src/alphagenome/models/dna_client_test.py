@@ -55,7 +55,7 @@ def _generate_prediction_protos(
     predictions: dna_client.Output,
     requested_outputs: Sequence[dna_model_pb2.OutputType],
     bytes_per_chunk: int,
-    response_proto_type: ...,
+    response_proto_type,
 ):
   """Helper to generate proto responses for the provided predictions."""
   for output_type in requested_outputs:
@@ -150,7 +150,7 @@ def _generate_variant_protos(
 def _generate_variant_scoring_protos(
     scores: list[anndata.AnnData],
     bytes_per_chunk: int,
-    response_proto_type: ...,
+    response_proto_type,
     variant: genome.Variant | None = None,
 ):
   """Helper to generate variant scoring responses for the provided scores."""
@@ -205,7 +205,7 @@ def _generate_variant_scoring_protos(
 def _generate_interval_scoring_protos(
     scores: list[anndata.AnnData],
     bytes_per_chunk: int,
-    response_proto_type: ...,
+    response_proto_type,
     interval: genome.Interval,
 ):
   """Helper to generate interval scoring responses for the provided scores."""
@@ -311,7 +311,7 @@ class ClientTest(parameterized.TestCase):
       self,
       actual: dna_client.Output,
       expected: dna_client.Output,
-      msg: ...,
+      msg,
   ) -> None:
     """Helper function to compare Output objects."""
     self.assertEqual(actual.atac, expected.atac, msg)
@@ -330,7 +330,7 @@ class ClientTest(parameterized.TestCase):
       self,
       actual: track_data.TrackMetadata,
       expected: track_data.TrackMetadata,
-      msg: ...,
+      msg,
   ) -> None:
     if actual is not None and expected is not None:
       pd.testing.assert_frame_equal(actual, expected)
@@ -341,7 +341,7 @@ class ClientTest(parameterized.TestCase):
       self,
       actual: dna_client.OutputMetadata,
       expected: dna_client.OutputMetadata,
-      msg: ...,
+      msg,
   ) -> None:
     """Helper function to compare OutputMetadata objects."""
     self._assert_track_metadata_equal(actual.atac, expected.atac, msg)
@@ -366,7 +366,7 @@ class ClientTest(parameterized.TestCase):
       self,
       actual: track_data.TrackData,
       expected: track_data.TrackData,
-      msg: ...,
+      msg,
   ) -> None:
     """Helper function to compare TrackData objects."""
     pd.testing.assert_frame_equal(actual.metadata, expected.metadata)
@@ -378,7 +378,7 @@ class ClientTest(parameterized.TestCase):
       self,
       actual: junction_data.JunctionData,
       expected: junction_data.JunctionData,
-      msg: ...,
+      msg,
   ) -> None:
     pd.testing.assert_frame_equal(actual.metadata, expected.metadata)
     np.testing.assert_array_equal(actual.junctions, expected.junctions)
