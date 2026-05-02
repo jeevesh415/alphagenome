@@ -293,7 +293,7 @@ def _create_example_model_predictions(
 
 def _create_mock_channel_and_stream(
     response_callable, *, bidi_stream: bool = True
-) -> ...:
+):
   mock_stream = mock.create_autospec(
       grpc.StreamStreamMultiCallable, side_effect=response_callable
   )
